@@ -1,0 +1,25 @@
+li 
+{
+    list-style: none;
+    margin-left: -100px;
+}
+
+.hidden-fragment
+{
+    display: none;
+}
+
+.text-center
+{
+    text-align: center;
+}
+
+.current-fragment.hidden-fragment
+{
+    display: block;
+}
+
+ul, pre
+{
+    font-size: .8em !important;
+}
