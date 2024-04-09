@@ -1,0 +1,1282 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>React/Redux</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../@lib/core.css">
+    <link rel="stylesheet" href="../@lib/theme.css">
+    <link rel="icon" href="./images/favicon.ico" />
+</head><body class="white"><div class="reveal"><div class="slides">
+
+<section class="center">
+    <h2>React</h2>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold;">Немного истории</h2>
+    <h2 class="grey" style="font-size: 35px;">Эволюция задач перед JS</h2>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold;">Простые задачи</h2>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <img src="./images/simple-javascript.gif" width="600">
+    </div>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold; font-size: 35px;">Любые изменения на странице чаще всего вызывали полную перезагрузку страницы</h2>
+    <div style="margin-top: 50px; display: flex; align-items: center; justify-content: center;">
+        <img src="images/multi-page-app-4.png" width="1000">
+    </div>
+</section>
+
+<section class="object-fit-fill" data-background-video="./images/notes-app.mp4" data-background-size="contain" data-background-video-loop data-background-position="top" data-background-color="#f6f5f3">
+    <h2 style="margin-top: 50px; font-weight: bold;">Более сложные задачи</h2>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">Single
+        Page Application
+        &nbsp;<span class="grey" style="font-size: 35px;">(SPA)</span></h2>
+    <p>Веб-приложение или сайт, который загружает только одну страницу и все последующие запросы
+        обрабатываются без полной перезагрузки страницы</p>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold; font-size: 35px;">В SPA сервер отвечает только данными, а все изменения верстки происходят из клиентского JavaScript</h2>
+    <div style="margin-top: 50px; display: flex; align-items: center; justify-content: center;">
+        <img src="images/single-page-app-4.png" width="1000">
+    </div>
+</section>
+
+<section class="center">
+    <h1 style="font-family: 'Ubuntu Mono', sourcesanspro-light, sans-serif; display: flex; align-items: center; justify-content: center;">
+        <img src="./images/react-logo.svg" width="200" style="margin-left: -240px">
+        <span style="margin-left: 40px;">React</span>
+    </h1>
+</section>
+
+<section class="center">
+    <p> <strong style="font-weight: bold;">React</strong> &mdash; JavaScript-библиотека для создания пользовательских интерфейсов, которая позволяет довольно просто реализовывать и SPA в том числе</p>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold;">Концепции React</h2>
+    <div style="display: flex; justify-content: center; font-size: 40px; align-items: center;">
+        <ol style="list-style: none">
+            <li>Компонентный подход</li>
+            <li>Эффективная абстракция над DOM</li>
+            <li>Реактивный рендеринг</li>
+        </ol>
+    </div>
+</section>
+
+<section data-background-image="./images/first-component.png" data-background-size="50%" data-background-color="#f6f5f3" data-background-position="50% 80%">
+    <h2 style="font-weight: bold;">Как пользоваться?</h2>
+</section>
+
+<section>
+    <h2 style="font-weight: bold;">Как пользоваться?</h2>
+    <pre><code data-trim data-noescape class="javascript" style="font-size: 16px">
+        // Импортируем необходимые библиотеки
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+
+        // Выбираем элемент, внутри которого мы хотим нарисовать форму
+        const root = document.getElementById('root');
+
+        // Создаем элемент формы
+        const form = React.createElement(
+            'div',
+            { className: 'editor' },
+            // Элемент состоит из 3ех частей: имя тега, атрибуты, дочерние элементы
+            // HTML эквивалент: &lt;input placeholder="Ключ заметки" /&gt;
+            React.createElement('input', { placeholder: 'Ключ заметки' }),
+            React.createElement('textarea', { placeholder: 'Текст заметки' }),
+            React.createElement('button', null, 'Отменить'),
+            // HTML эквивалент: &lt;button&gt;Сохранить&lt;/button&gt;
+            React.createElement('button', null, 'Сохранить')
+        );
+
+        // Отображаем форму на экране
+        ReactDOM.render(form, root);
+    </code></pre>
+</section>
+
+<section>
+    <h2 style="font-weight: bold;">Как пользоваться?</h2>
+    <pre><code data-trim data-noescape class="javascript" style="font-size: 16px">
+        // Импортируем необходимые библиотеки
+        import React from 'react';
+        import ReactDOM from 'react-dom';<span style="opacity: .2">
+
+        // Выбираем элемент, внутри которого мы хотим нарисовать форму
+        const root = document.getElementById('root');
+
+        // Создаем элемент формы
+        const form = React.createElement(
+            'div',
+            { className: 'editor' },
+            // Элемент состоит из 3ех частей: имя тега, атрибуты, дочерние элементы
+            // HTML эквивалент: &lt;input placeholder="Ключ заметки" /&gt;
+            React.createElement('input', { placeholder: 'Ключ заметки' }),
+            React.createElement('textarea', { placeholder: 'Текст заметки' }),
+            React.createElement('button', null, 'Отменить'),
+            // HTML эквивалент: &lt;button&gt;Сохранить&lt;/button&gt;
+            React.createElement('button', null, 'Сохранить')
+        );
+
+        // Отображаем форму на экране
+        ReactDOM.render(form, root);</span>
+    </code></pre>
+</section>
+
+<section>
+    <h2 style="font-weight: bold;">Как пользоваться?</h2>
+    <pre><code data-trim data-noescape class="javascript" style="font-size: 16px">
+        <span style="opacity: .2">// Импортируем необходимые библиотеки
+        import React from 'react';
+        import ReactDOM from 'react-dom';</span>
+
+        // Выбираем элемент, внутри которого мы хотим нарисовать форму
+        const root = document.getElementById('root');<span style="opacity: .2">
+
+        // Создаем элемент формы
+        const form = React.createElement(
+            'div',
+            { className: 'editor' },
+            // Элемент состоит из 3ех частей: имя тега, атрибуты, дочерние элементы
+            // HTML эквивалент: &lt;input placeholder="Ключ заметки" /&gt;
+            React.createElement('input', { placeholder: 'Ключ заметки' }),
+            React.createElement('textarea', { placeholder: 'Текст заметки' }),
+            React.createElement('button', null, 'Отменить'),
+            // HTML эквивалент: &lt;button&gt;Сохранить&lt;/button&gt;
+            React.createElement('button', null, 'Сохранить')
+        );
+
+        // Отображаем форму на экране
+        ReactDOM.render(form, root);</span>
+    </code></pre>
+</section>
+
+<section>
+    <h2 style="font-weight: bold;">Как пользоваться?</h2>
+    <pre><code data-trim data-noescape class="javascript" style="font-size: 16px">
+        <span style="opacity: .2">// Импортируем необходимые библиотеки
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+
+        // Выбираем элемент, внутри которого мы хотим нарисовать форму
+        const root = document.getElementById('root');
+
+        // Создаем элемент формы целиком
+        const form = React.createElement(
+            'div',
+            { className: 'editor' },</span>
+            // Элемент состоит из 3ех частей: имя тега, атрибуты, дочерние элементы
+            // HTML эквивалент: &lt;input placeholder="Ключ заметки" /&gt;
+            React.createElement('input', { placeholder: 'Ключ заметки' }),<span style="opacity: .2">
+            React.createElement('textarea', { placeholder: 'Текст заметки' }),
+            React.createElement('button', null, 'Отменить'),</span>
+            // HTML эквивалент: &lt;button&gt;Сохранить&lt;/button&gt;
+            React.createElement('button', null, 'Сохранить')<span style="opacity: .2">
+        );
+
+        // Отображаем форму на экране
+        ReactDOM.render(form, root);</span>
+    </code></pre>
+</section>
+
+<section>
+    <h2 style="font-weight: bold;">Как пользоваться?</h2>
+    <pre><code data-trim data-noescape class="javascript" style="font-size: 16px">
+        <span style="opacity: .2">// Импортируем необходимые библиотеки
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+
+        // Выбираем элемент, внутри которого мы хотим нарисовать форму
+        const root = document.getElementById('root');</span>
+
+        // Создаем элемент формы
+        const form = React.createElement(
+            'div',
+            { className: 'editor' },
+            // Элемент состоит из 3ех частей: имя тега, атрибуты, дочерние элементы
+            // HTML эквивалент: &lt;input placeholder="Ключ заметки" /&gt;
+            React.createElement('input', { placeholder: 'Ключ заметки' }),
+            React.createElement('textarea', { placeholder: 'Текст заметки' }),
+            React.createElement('button', null, 'Отменить'),
+            // HTML эквивалент: &lt;button&gt;Сохранить&lt;/button&gt;
+            React.createElement('button', null, 'Сохранить')
+        );<span style="opacity: .2">
+
+        // Отображаем форму на экране
+        ReactDOM.render(form, root);</span>
+    </code></pre>
+</section>
+
+<section>
+    <h2 style="font-weight: bold;">Как пользоваться?</h2>
+    <pre><code data-trim data-noescape class="javascript" style="font-size: 16px">
+        <span style="opacity: .2">// Импортируем необходимые библиотеки
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+
+        // Выбираем элемент, внутри которого мы хотим нарисовать форму
+        const root = document.getElementById('root');
+
+        // Создаем элемент формы
+        const form = React.createElement(
+            'div',
+            { className: 'editor' },
+            // Элемент состоит из 3ех частей: имя тега, атрибуты, дочерние элементы
+            // HTML эквивалент: &lt;input placeholder="Ключ заметки" /&gt;
+            React.createElement('input', { placeholder: 'Ключ заметки' }),
+            React.createElement('textarea', { placeholder: 'Текст заметки' }),
+            React.createElement('button', null, 'Отменить'),
+            // HTML эквивалент: &lt;button&gt;Сохранить&lt;/button&gt;
+            React.createElement('button', null, 'Сохранить')
+        );</span>
+
+        // Отображаем форму на экране
+        ReactDOM.render(form, root);</span>
+    </code></pre>
+</section>
+
+<section class="slide-flex object-fit-fill" data-background-video="./images/vdom.mp4" data-background-video-loop data-background-size="contain" data-background-position="right" data-background-color="#f6f5f3" style="height: 100%; display: flex; align-items: flex-end;">
+    <h2 style="font-weight: bold; width: 100%; text-align: center; margin-bottom: 50px;">При изменениях React перерисовывает только нужные части интерфейса</h2>
+</section>
+
+<section class="center">
+    <div style="display: flex; justify-content: center; flex-direction: column;">
+        <pre><code data-trim class="javascript" style="font-size: 40px; overflow: visible;">
+            const element = <h1>Что такое JSX?</h1>;
+        </code></pre>
+        <p style="margin-left: 20px; text-align: left" class="fragment">
+            JSX — это расширение языка JavaScript.<br>
+            Позволяет нагляднее создавать элементы.
+        </p>
+    </div>
+</section>
+
+<section>
+    <pre><code data-trim class="html" style="font-size: 16px">
+        &lt;select multiple>
+            &lt;option value="Пункт 1">Пункт 1&lt;/option>
+            &lt;option selected value="Пункт 2">Пункт 2&lt;/option>
+        &lt;/select>
+    </code></pre>
+    <p class="grey" style="text-align: center; font-weight: bold; margin: 0">VS</p>
+    <pre><code data-trim style="font-size: 16px" class="javascript">
+        React.createElement(
+            'select',
+            { multiple: true },
+            React.createElement(
+                'option',
+                { value: 'Пункт 1' },
+                'Пункт 1'
+            ),
+            React.createElement(
+                'option',
+                { selected: true, value: 'Пункт 2' },
+                'Пункт 2'
+            )
+        );
+    </code></pre>
+</section>
+
+<section>
+    <h2 style="font-weight: bold;">Отличия JSX от HTML</h2>
+    <ul style="font-size: 32px;">
+        <li class="fragment">Все атрибуты именуются в <strong>camelCase</strong></li>
+        <li class="fragment">Все атрибуты должны быть закрыты</li>
+        <li class="fragment">Имена пользовательских компонентов с заглавной буквы</li>
+    </ul>
+</section>
+
+<section class="center">
+    <p>Так как JSX превратится в <strong>валидный JavaScript</strong>, то в нем можно использовать любые JavaScript выражения</p>
+</section>
+
+<section>
+    <h2 style="font-weight: bold;"><strong>JavaScript</strong> выражения должны быть заключены в <strong>{ }</strong></h2>
+    <pre><code class="javascript" data-trim>
+        const user = { name: 'Студент' };
+
+        const element = &lt;div>Привет, {user.name}&lt;/div>;
+    </code></pre>
+</section>
+
+<section>
+    <h2 style="font-weight: bold;">Всё содержимое JSX экранируется</h2>
+    <pre><code class="javascript" data-trim>
+        const html = '&lt;strong>Мир&lt;/strong>';
+
+        const element = &lt;div>Привет, {html}&lt;/div>;
+    </code></pre>
+    <p class="fragment">Привет, &lt;strong&gt;Мир&lt;/strong&gt;</p>
+</section>
+
+<section>
+    <h2 style="font-weight: bold;">Однако, есть выход</h2>
+    <pre><code class="language-typescript" data-trim data-noescape>
+        const html = 'Привет, &lt;strong>Мир&lt;/strong>!';
+
+        const element = (
+            &lt;<span class="hljs-name">div</span> <span class="hljs-attr">dangerouslySetInnerHTML</span>={{ __html: html }} />
+        );
+    </code></pre>
+    <p class="fragment">Привет, <span style="font-weight: bold;">Мир</span>!</p>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold;">Компоненты</h2>
+    <h2 class="grey" style="font-size: 35px; font-weight: bold;">Components</h2>
+</section>
+
+<section class="center">
+    <p>Компоненты предоставляют механизм разбиения интерфейса на небольшие независимые части, которые реализуются по отдельности</p>
+</section>
+
+<section>
+    <p style="font-weight: bold; font-size: 40px;">Пример</p>
+    <pre><code style="overflow: visible;" data-trim data-noescape class="typescript">
+        const root = document.getElementById('root');
+
+        ReactDOM.render(
+            // Весь код, отвечающий за форму, можно вынести в компонент
+            &lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>="editor">
+                &lt;<span class="hljs-name">input</span> <span class="hljs-attr">placeholder</span>="Ключ заметки" />
+                &lt;<span class="hljs-name">textarea</span> <span class="hljs-attr">placeholder</span>="Текст заметки" />
+                &lt;<span class="hljs-name">button</span>>Отменить&lt;/<span class="hljs-name">button</span>>
+                &lt;<span class="hljs-name">button</span>>Сохранить&lt;/<span class="hljs-name">button</span>>
+            &lt;/<span class="hljs-name">div</span>>,
+            root
+        );
+    </code></pre>
+</section>
+
+<!-- Slide 35 -->
+<section>
+    <p style="font-weight: bold; font-size: 40px;">Пример</p>
+    <pre><code style="overflow: visible;" data-trim data-noescape class="typescript">
+        <span style="opacity: .2;">const root = document.getElementById('root');
+
+        ReactDOM.render(</span>
+            // Весь код, отвечающий за форму, можно вынести в компонент
+            &lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>="editor">
+                &lt;<span class="hljs-name">input</span> <span class="hljs-attr">placeholder</span>="Ключ заметки" />
+                &lt;<span class="hljs-name">textarea</span> <span class="hljs-attr">placeholder</span>="Текст заметки" />
+                &lt;<span class="hljs-name">button</span>>Отменить&lt;/<span class="hljs-name">button</span>>
+                &lt;<span class="hljs-name">button</span>>Сохранить&lt;/<span class="hljs-name">button</span>>
+            &lt;/<span class="hljs-name">div</span>><span style="opacity: .2;">,
+            root
+        );</span>
+    </code></pre>
+</section>
+
+<section class="center">
+    <p>Почти всё в приложении, написанном на React, будет <strong>компонентом</strong>. Неважно что это &mdash; форма, компонент заметки или целая страница</p>
+</section>
+
+<section class="center">
+    <p>Это становится возможным благодаря механизму <strong>композиции или объединения компонентов</strong>. Любой компонент в своей реализации может использовать любой другой компонент</p>
+</section> 
+
+<section data-background-image="./images/composite-components.png" data-background-size="50%" data-background-color="#f6f5f3" data-background-position="50% 80%">
+    <h2 style="font-weight: bold;">Объединение компонентов</h2>
+</section>
+
+<section>
+    <h2 style="font-weight: bold;">Объединение компонентов</h2>
+    <pre><code class="javascript" data-trim data-noescape>
+        import Editor from './Editor';
+        import Notes from './Notes';
+
+        function NotesApp() {
+            return (
+                &lt;div className="notes-app">
+                    &lt;Editor />
+                    &lt;Notes />
+                &lt;/div>
+            );
+        }
+    </code></pre>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold;">Атрибуты</h2>
+    <h2 class="grey" style="font-size: 35px; font-weight: bold;">Props</h2>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">Атрибуты&nbsp;<span
+        class="grey" style="font-size: 40px;">(Props)</span></h2>
+    <p>Любой компонент может получать на вход <strong style="font-weight: bold;">пропсы</strong>, подобно тому как функции принимают аргументы, а html-элементы атрибуты</p>
+    <p class="fragment">Именно просы позволяют делать компоненты универсальными</p>
+</section>
+
+<!-- Slide 45 -->
+<section>
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">Атрибуты&nbsp;<span
+            class="grey" style="font-size: 40px;">(Props)</span></h2>
+    <div style="display: flex; justify-content: center">
+        <pre><code class="language-javascript" data-trim data-noescape>
+            function Notes() {
+                return (
+                    &lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span
+                class="hljs-string">"notes"</span>>
+                        &lt;<span class="hljs-name">Note</span> <span class="hljs-attr">name</span>=<span
+                class="hljs-string">"Books"</span> <span
+                class="hljs-attr">text</span>=<span class="hljs-string">"Books to read"</span> />
+                        &lt;<span class="hljs-name">Note</span> <span class="hljs-attr">name</span>=<span
+                class="hljs-string">"Music"</span> <span
+                class="hljs-attr">text</span>=<span class="hljs-string">"Music to listen"</span> />
+                        &lt;<span class="hljs-name">Note</span> <span class="hljs-attr">name</span>=<span
+                class="hljs-string">"Films"</span> <span
+                class="hljs-attr">text</span>=<span class="hljs-string">"Films to watch"</span> />
+                    &lt;/<span class="hljs-name">div</span>>
+                );
+            }
+        </code></pre>
+    </div>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">Атрибуты&nbsp;<span
+        class="grey" style="font-size: 40px;">(Props)</span></h2>
+    <p>В компонентах пропсы доступны в <strong>объекте</strong>, который будет передан в <strong>первый аргумент</strong> функции-компонента</p>
+</section>
+
+<section>
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">Атрибуты&nbsp;<span
+            class="grey" style="font-size: 40px;">(Props)</span></h2>
+    <pre><code class="typescript" data-trim data-noescape>
+        function Note(props) {
+            return (
+                &lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>="note">
+                    &lt;<span class="hljs-name">h1</span>>{props.name}&lt;/<span class="hljs-name">h1</span>>
+                    &lt;<span class="hljs-name">p</span>>{props.text}&lt;/<span class="hljs-name">p</span>>
+                &lt;/<span class="hljs-name">div</span>>
+            );
+        }
+    </code></pre>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold;">Потомки</h2>
+    <h2 class="grey" style="font-size: 35px; font-weight: bold;">Children</h2>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Потомки&nbsp;<span class="grey" style="font-size: 40px;">(Children)</span>
+    </h2>
+    <p><strong>children</strong> - это зарезервированное название одного из пропсов</p>
+    <p>Этот механизм позволяет передавать дочерние элементы более наглядно и явно, подобно тому как это делается в HTML</p>
+</section>
+
+<section>
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Потомки&nbsp;<span class="grey" style="font-size: 40px;">(Children)</span>
+    </h2>
+    <pre><code class="language-javascript" style="font-size: 23px;" data-trim data-noescape>
+        function Notes() {
+            return (
+                &lt;div className="notes">
+                    &lt;Note name="Books">
+                        Books to read
+                    &lt;/Note>
+
+                    &lt;Note name="Films">
+                        &lt;p>Films to read&lt;/p>
+                        &lt;button>Like&lt;/button>
+                    &lt;/Note>
+
+                    ...
+                &lt;/div>
+            );
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Потомки&nbsp;<span class="grey" style="font-size: 40px;">(Children)</span>
+    </h2>
+    <pre><code class="language-typescript" style="font-size: 19px;" data-trim data-noescape>
+        import React from 'react';
+
+        function Note(props) {
+            return (
+                &lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>="note">
+                    &lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>="note__title">
+                        {props.name}
+                    &lt;/<span class="hljs-name">h1</span>>
+                    &lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"note__content"</span>>
+                        {props.children}
+                    &lt;/<span class="hljs-name">div</span>>
+                &lt;/<span class="hljs-name">div</span>>
+            );
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Потомки&nbsp;<span class="grey" style="font-size: 40px;">(Children)</span>
+    </h2>
+    <pre><code class="language-typescript" style="font-size: 19px;" data-trim data-noescape>
+        <span style="opacity: .3">import React from 'react';
+
+        function Note(props) {
+            return (
+                &lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>="note">
+                    &lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>="note__title">
+                        {props.name}
+                    &lt;/<span class="hljs-name">h1</span>></span>
+                    &lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"note__content"</span>>
+                        {props.children}
+                    &lt;/<span class="hljs-name">div</span>><span style="opacity: .3">
+                &lt;/<span class="hljs-name">div</span>>
+            );
+        }</span>
+    </code></pre>
+</section>
+
+<section data-background-image="./images/warning-note.png" data-background-size="contain" data-background-position="center 20px" data-background-color="#f6f5f3">
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Условный рендеринг
+    </h2>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Условный рендеринг
+    </h2>
+    <p>Так как JSX позволяет использовать произвольные JavaScript выражения, то проблемы необходимости рендеринга в зависимости от тех или иных условий решаются стандартными средствами языка</p>
+</section>
+
+<section>
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Условный рендеринг
+    </h2>
+    <pre><code class="language-typescript" data-trim data-noescape>
+        function Note(props) {
+            return (
+                &lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>="note">
+                    &lt;<span class="hljs-name">h2</span> <span class="hljs-attr">className</span>="note__title">
+                        {props.type === 'warning'
+                            ? 'Warning'
+                            : props.name
+                        }
+                    &lt;/<span class="hljs-name">h2</span>>
+                    ...
+                &lt;/<span class="hljs-name">div</span>>
+            );
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Условный рендеринг
+    </h2>
+    <pre><code class="language-typescript" data-trim data-noescape>
+        <span style="opacity: .3">function Note(props) {
+            return (
+                &lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>="note"></span>
+                    &lt;<span class="hljs-name">h2</span> <span class="hljs-attr">className</span>="note__title">
+                        {props.type === 'warning'
+                            ? 'Warning'
+                            : props.name
+                        }
+                    &lt;/<span class="hljs-name">h2</span>><span style="opacity: .3">
+                    ...
+                &lt;/<span class="hljs-name">div</span>>
+            );
+        }</span>
+    </code></pre>
+</section>
+
+<section data-background-image="./images/warning-note.png" data-background-size="contain" data-background-position="center 20px" data-background-color="#f6f5f3">
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Работа со списками
+    </h2>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Работа со списками
+    </h2>
+    <p>Проблемы со списками однотипных элементов решаются аналогично</p>
+</section>
+
+<section>
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Работа со списками
+    </h2>
+    <pre><code class="language-typescript" data-trim data-noescape>
+        function NotesList() {
+            return (
+                &lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>="notes-list">
+                    &lt;<span class="hljs-name">Note</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"Books"</span> <span class="hljs-attr">text</span>=<span class="hljs-strng">"Books to read"</span> />
+                    &lt;<span class="hljs-name">Note</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"Films"</span> <span class="hljs-attr">text</span>=<span class="hljs-strng">"Films to watch"</span> />
+                    &lt;<span class="hljs-name">Note</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"Music"</span> <span class="hljs-attr">text</span>=<span class="hljs-strng">"Music to listen"</span> />
+                &lt;/<span class="hljs-name">div</span>>
+            );
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Работа со списками
+    </h2>
+    <pre><code class="language-typescript" data-trim data-noescape>
+        function NotesList({ notes }) {
+            return (
+                &lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>="notes-list">
+                    {notes.map(note => (
+                        &lt;<span class="hljs-name">Note</span> <span class="hljs-attr">name</span>={note.name} <span class="hljs-attr">text</span>={note.text} />
+                    ))}
+                &lt;/<span class="hljs-name">div</span>>
+            );
+        }
+    </code></pre>
+    <p class="fragment" style="font-size: 30px;" data-fragment-index="1">Однако, при рендеринге, нас ожидает ошибка в консоли браузера</p>
+    <p class="red fragment" data-fragment-index="1" style="font-size: 30px;">
+        Each child in an array or iterator should have a unique "key" prop.
+    </p>
+</section>
+
+<section class="slide-flex object-fit-fill" data-background-video="./images/vdom.mp4" data-background-video-loop data-background-size="contain" data-background-position="right" data-background-color="#f6f5f3" style="height: 100%; display: flex; align-items: flex-end;">
+    <h2 style="font-weight: bold; width: 100%; text-align: center; margin-bottom: 50px;">При изменениях React перерисовывает только нужные части интерфейса</h2>
+</section>
+
+<section>
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Работа со списками
+    </h2>
+    <pre><code class="language-typescript" data-trim data-noescape style="font-size: 23px;">
+        function NotesList({ notes }) {
+            return (
+                &lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>="notes-list">
+                    {notes.map(note => (
+                        &lt;<span class="hljs-name">Note</span>
+                            <span class="hljs-attr">name</span>={note.name}
+                            <span class="hljs-attr">text</span>={note.text}
+                            <span class="hljs-attr">key</span>={note.id} // Избавляемся от ошибки
+                        />
+                    ))}
+                &lt;/<span class="hljs-name">div</span>>
+            );
+        }
+    </code></pre>
+    <p style="font-size: 28px; ">Нужно добавить уникальный пропс <strong style="font-weight: bold;">key</strong> к каждому из элементов списка</p>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Работа со списками
+    </h2>
+    <p>Ключи (keys) помогают React определять, какие элементы были изменены, добавлены или удалены. Их необходимо указывать, чтобы React мог сопоставлять элементы массива с течением времени</p>
+</section>
+
+<section>
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Работа со списками
+    </h2>
+    <div style="display: flex; align-items: center; justify-content: center; font-size: 40px;">
+        <ul style="font-size: 32px;">
+            <li>Key должен однозначно определять элемент списка и быть стабильным</li>
+            <li>Повторяющиеся key в рамках одного списка недопустимы</li>
+            <li>Использовать индекс элемента в массиве лучше только тогда, когда другого выхода нет</li>
+        </ul>
+    </div>
+    <div style="text-align: center;">
+        <a style="font-size: 35px;" href="https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318">Почему использовать индекс в качестве key это плохо</a>
+    </div>
+</section>
+
+<section data-background-video="./images/set-state-example.mp4" data-background-size="contain" data-background-position="center" data-background-video-loop data-background-color="#f6f5f3">
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Состояние компонента&nbsp;<span class="grey" style="font-size: 40px;">(State)</span>
+    </h2>
+</section>
+
+<section>
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Состояние компонента&nbsp;<span class="grey" style="font-size: 40px;">(State)</span>
+    </h2>
+    <p>Состояние компонента &mdash; это механизм, который позволяет сделать его «живым»</p>
+    <p>Основное отличие состояния от пропсов в том, что состояние доступно только самому компоненту</p>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Состояние компонента&nbsp;<span class="grey" style="font-size: 40px;">(State)</span></h2>
+    <p>Любой компонент автоматически отреагирует на все изменения собственного состояния и будет перерисован</p>
+</section>
+
+<section>
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Состояние компонента&nbsp;<span class="grey" style="font-size: 40px;">(State)</span>
+    </h2>
+    <pre><code class="javascript" style="font-size: 18px;" data-trim data-noescape>
+        import { useState } from 'react';
+
+        function Note(props) {
+            const [isReadMoreClicked, setIsReadMoreClicked] = useState(false);
+
+            return (
+                &lt;div className="note">
+                    &lt;div className="note__name">Books&lt;/div>
+                    &lt;div className="note__text">Books to read&lt;/div>
+                    {<span class="hljs-keyword">isReadMoreClicked
+                        ? &lt;div className="note__additional-text">Additional text&lt;/div>
+                        : &lt;button onClick={() => setIsReadMoreClicked(true)}>Read more&lt;/button>
+                    }
+                &lt;/div>
+            );
+        }
+    </code></pre>
+</section>
+
+<section>
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Состояние компонента&nbsp;<span class="grey" style="font-size: 40px;">(State)</span>
+    </h2>
+    <pre><code class="javascript" style="font-size: 18px;" data-trim data-noescape>
+        import { useState } from 'react';
+        <span style="opacity: .3">
+        function Note(props) {
+            const [isReadMoreClicked, setIsReadMoreClicked] = useState(false);
+
+            return (
+                &lt;div className="note">
+                    &lt;div className="note__name">Books&lt;/div>
+                    &lt;div className="note__text">Books to read&lt;/div>
+                    {<span class="hljs-keyword">isReadMoreClicked
+                        ? &lt;div className="note__additional-text">Additional text&lt;/div>
+                        : &lt;button onClick={() => setIsReadMoreClicked(true)}>Read more&lt;/button>
+                    }
+                &lt;/div>
+            );
+        }</span>
+    </code></pre>
+</section>
+
+<section>
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Состояние компонента&nbsp;<span class="grey" style="font-size: 40px;">(State)</span>
+    </h2>
+    <pre><code class="javascript" style="font-size: 18px;" data-trim data-noescape>
+    <span style="opacity: .3">    import { useState } from 'react';
+
+        function Note(props) {</span>
+            const [isReadMoreClicked, setIsReadMoreClicked] = useState(false);<span style="opacity: .3">
+
+            return (
+                &lt;div className="note">
+                    &lt;div className="note__name">Books&lt;/div>
+                    &lt;div className="note__text">Books to read&lt;/div>
+                    {<span class="hljs-keyword">isReadMoreClicked
+                        ? &lt;div className="note__additional-text">Additional text&lt;/div>
+                        : &lt;button onClick={() => setIsReadMoreClicked(true)}>Read more&lt;/button>
+                    }
+                &lt;/div>
+            );
+        }</span>
+    </code></pre>
+</section>
+
+<section>
+    <h2 style="font-weight: bold; display: flex; align-items: center; justify-content: center;">
+        Состояние компонента&nbsp;<span class="grey" style="font-size: 40px;">(State)</span>
+    </h2>
+    <pre><code class="javascript" style="font-size: 18px;" data-trim data-noescape>
+    <span style="opacity: .3">    import { useState } from 'react';
+
+        function Note(props) {
+            const [isReadMoreClicked, setIsReadMoreClicked] = useState(false);
+
+            return (
+                &lt;div className="note">  
+                    &lt;div className="note__name">Books&lt;/div>
+                    &lt;div className="note__text">Books to read&lt;/div>        </span>
+                    {<span class="hljs-keyword">isReadMoreClicked
+                        ? &lt;div className="note__additional-text">Additional text&lt;/div>
+                        : &lt;button onClick={() => setIsReadMoreClicked(true)}>Read more&lt;/button>
+                    }<span style="opacity: .3">
+                &lt;/div>
+            );
+        }</span>
+    </code></pre>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold;">Правила работы с состоянием</h2>
+</section>
+
+<section>
+    <h2 style="font-weight: bold; font-size: 48px;">
+        Для повышения производительности React может групировать обновления состояния
+    </h2>
+    <pre><code class="javascript" data-trim data-noescape style="font-size: 20px;">
+        /**
+         * Неправильно, так как обновления будут сгруппированы и каждое
+         * из них обратится к старому значению counter.
+         * Как результат значение counter увеличится на 1, вместо 2
+         */
+        setCounter(counter + 1);
+        setCounter(counter + 1);
+
+        /**
+         * Правильно. Передавая функцию в качестве аргумента, мы делаем
+         * изменения атомарными. Каждое из них получит актуальное значение состояния
+         */
+        setCounter(counter => counter + 1);
+        setCounter(counter => counter + 1); 
+    </code></pre>
+</section>
+
+<section class="center">
+    <h2 style="font-weight: bold; font-size: 48px;">
+        Лучше делать более атомарными (чтобы избежать ненужных перерисовок)
+    </h2>
+</section>
+
+<section class="center">
+    <h1>React-хуки</h1>
+</section>
+
+<section class="little">
+    <h2>Хуки — специальные функции в React</h2>
+    <ul style="font-size: 32px;">
+        <li>Добавляют возможность управлять состоянием компонента</li>
+        <li>Предоставляют возможность выполнить некоторые интерактивные действия</li>
+        <li>Позволяют “прицепить“ выполнение некоторого кода к жизненному циклу компонента</li>
+        <li style="color: #999;">Обязательно прочитайте документацию, она небольшая, но крутая (ссылка в конце)</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Встроенные в React хуки (10 штук)</h2>
+    <ul style="font-size: 32px;">
+        <li>useState</li>
+        <li>useRef</li>
+        <li>useContext</li>
+        <li>useEffect</li>
+        <li>useMemo</li>
+        <li>useCallback</li>
+        <li>...</li>
+    </ul>
+</section>
+
+<section class="little">
+    <h2>useRef</h2>
+    <ul style="font-size: 32px;">
+        Добавляет переменную, которая хранит нереактивную ссылку на узел
+        <pre><code class="language-typescript" data-noescape data-trim style="font-size: 22px;">
+            import React, { useRef } from 'react';
+
+            const AnyComponent = () => {
+                const ref = useRef(null);
+
+                const onSubmit = () => {
+                    ref.current.submit();
+                };
+
+                return (
+                    &lt;form ref={ref}>...&lt;/form>
+                )
+            }
+        </code></pre>
+    </ul>
+</section>
+
+<section class="little">
+    <h2>useMemo</h2>
+    <ul style="font-size: 26px;">
+        <li>
+            Добавляет возможность кешировать какие-то значения
+            <pre><code class="language-typescript" data-noescape data-trim style="font-size: 22px;">
+                import React, { useMemo } from 'react';
+
+                const AnyComponent = (props) => {
+                    const value = useMemo(
+                        () => calculateAnyValue(props.a, state.b),
+                        [props.a, state.b]
+                    );
+                    
+                    ...
+                }
+            </code></pre>
+        </li>
+        <li class="fragment">Позволяет явно сказать реакту, когда не требуется пересчитывать значение</li>
+        <li class="fragment">Запускается во время рендера и не должен содержать side-effect</li>
+    </ul>
+</section>
+
+<section class="little">
+    <h2>useMemo</h2>
+    <ul style="font-size: 26px;">
+        <li>
+            Принимает 2 аргумента: функцию и массив зависимостей
+            <pre><code class="language-typescript" data-noescape data-trim style="font-size: 22px;">
+                import React, { useMemo } from 'react';
+
+                const AnyComponent = (props) => {
+                    const value = useMemo(
+                        () => calculateAnyValue(props.a, state.b),
+                        [props.a, state.b]
+                    );
+                    ...
+                }
+            </code></pre>
+        </li>
+    </ul>
+</section>
+
+<section class="little">
+    <h2>useMemo</h2>
+    <ul style="font-size: 26px;">
+        <li>
+            <span style="opacity: .3">Принимает 2 аргумента: </span>функцию <span style="opacity: .3">и массив зависимостей</span>
+            <pre><code class="language-typescript" data-noescape data-trim style="font-size: 22px;">
+                <span style="opacity: .3">import React, { useMemo } from 'react';
+
+                const AnyComponent = (props) => {
+                    const value = useMemo(
+                        </span>() => calculateAnyValue(props.a, state.b),<span style="opacity: .3">
+                        [props.a, state.b]
+                    );
+                    ...
+                }</span>
+            </code></pre>
+        </li>
+    </ul>
+</section>
+
+<section class="little">
+    <h2>useMemo</h2>
+    <ul style="font-size: 26px;">
+        <li>
+            <span style="opacity: .3">Принимает 2 аргумента: функцию и </span>массив зависимостей
+            <pre><code class="language-typescript" data-noescape data-trim style="font-size: 22px;">
+                <span style="opacity: .3">import React, { useMemo } from 'react';
+
+                const AnyComponent = (props) => {
+                    const value = useMemo(
+                        () => calculateAnyValue(props.a, state.b),
+                        </span>[props.a, state.b]<span style="opacity: .3">
+                    );
+                    ...
+                }</span>
+            </code></pre>
+        </li>
+    </ul>
+</section>
+
+<section class="little">
+    <h2>useCallback</h2>
+    <ul style="font-size: 26px;">
+        <li>
+            Добавляет возможность мемоизировать обработчики
+            <pre><code class="language-typescript" data-noescape data-trim style="font-size: 22px;">
+                import React, { useCallback } from 'react';
+
+                const AnyComponent = ({ name }) => {
+                    const value = useCallback(
+                        e => sendParams(name, e.target.value),
+                        [name]
+                    );
+                    ...
+                }
+            </code></pre>
+        </li>
+    </ul>
+</section>
+
+<section class="little">
+    <h2>useCallback</h2>
+    <ul style="font-size: 26px;">
+        <li>
+            Добавляет возможность мемоизировать обработчики
+            <pre><code class="language-typescript" data-noescape data-trim style="font-size: 22px;">
+                const value = useCallback(
+                    e => sendParams(name, e.target.value),
+                    [name]
+                );
+            </code></pre>
+        </li>
+        <li class="fragment">Пересчитывается только при изменении зависимостей</li>
+        <li class="fragment">Все, что используется внутри, нужно передать</li>
+    </ul>
+</section>
+
+<section class="little">
+    <h2>useEffect</h2>
+    <ul style="font-size: 26px;">
+        <li>
+            Декларирует способ выполнять что-то в различных стадиях жизненного цикла
+            <pre><code class="language-typescript" data-noescape data-trim style="font-size: 24px;">
+                import React, { useEffect } from 'react';
+
+                const AnyComponent = () => {
+                    useEffect(
+                        () => {
+                            ...
+                        },
+                        []
+                    );
+                }
+            </code></pre>
+        </li>
+        <li class="fragment">Основное предназначение: выполнение side-effect</li>
+    </ul>
+</section>
+
+<section class="little">
+    <h2>useEffect</h2>
+    <pre><code class="language-typescript" data-noescape data-trim style="font-size: 24px;">
+        import React, { useEffect } from 'react';
+
+        const AnyComponent = ({ pageName }) => {
+            useEffect(
+                () => {
+                    fetchAnyData(pageName);
+                }
+            );
+        }
+    </code></pre>
+    <div style="font-size: 36px;" class="fragment">Если не передать массив зависимостей, будет выполняться при каждом рендере</li>
+</section>
+
+<section class="little">
+    <h2>useEffect</h2>
+    <pre><code class="language-typescript" data-noescape data-trim style="font-size: 24px;">
+        import React, { useEffect } from 'react';
+
+        const AnyComponent = ({ pageName }) => {
+            useEffect(
+                () => {
+                    fetchAnyData(pageName);
+                },
+                []
+            );
+        }
+    </code></pre>
+    <div style="font-size: 36px;" class="fragment">Если передать пустой массив зависимостей, выполнится после только первого рендера (componentDidMount)</div>
+</section>
+
+<section class="little">
+    <h2>useEffect</h2>
+    <pre><code class="language-typescript" data-noescape data-trim style="font-size: 20px;">
+        const AnyComponent = () => {
+            useEffect(
+                () => {
+                    const keyPressHandler = () => {
+                        ...
+                    };
+
+                    document.addEventListener('keypress', keyPressHandler);
+
+                    return () => document.removeEventListener('keypress', keyPressHandler);
+                },
+                []
+            );
+        }
+    </code></pre>
+    <div style="font-size: 32px;" class="fragment">Можно вернуть функцию, которая будет выполнена при размонтировании компонента</div>
+</section>
+
+<section class="little">
+    <h2>useEffect</h2>
+    <pre><code class="language-typescript" data-noescape data-trim style="font-size: 20px;">
+        const AnyComponent = (props) => {
+            useEffect(
+                () => {
+                    const keyPressHandler = () => {
+                        ... // использует anyValue
+                    };
+
+                    document.addEventListener('keypress', keyPressHandler);
+
+                    return () => document.removeEventListener('keypress', keyPressHandler);
+                },
+                [props.anyValue]
+            );
+        }
+    </code></pre>
+    <div style="font-size: 32px;" class="fragment">Зависимости работают точно так же, как и в useCallback, useMemo</div>
+</section>
+
+<section class="little">
+    <h2>Собственные хуки</h2>
+    <ul style="font-size: 0.6em;">
+        <li class="fragment">Точно так же именуются с "use" в начале (так линтер и реакт понимают, что это хук)</li>
+        <li class="fragment">Внутри себя используют реакт-хуки или другие кастомные хуки</li>
+        <li class="fragment">В них можно либо инкапсулировать какую-то бизнес логику; тогда это будет хук, который предназначен для одного конкретного места</li>
+        <li class="fragment">Либо положить какой-то частый паттерн использования реакт-хуков; тогда это можно вынести в хэлперы и переиспользовать</li>
+    </ul>
+</section>
+
+<section class="little">
+    <h2>Напишем собственный хук</h2>
+    <pre><code class="language-typescript" data-noescape data-trim style="font-size: 24px;">
+        const useToggle = initialValue => {
+            const [value, setValue] = useState(initialValue);
+            
+            const toggle = useCallback(
+                () => setValue(value => !value),
+                []
+            )
+            
+            return [value, toggle];
+        }
+    </code></pre>
+</section>
+
+<section class="little">
+    <h2>Напишем собственный хук</h2>
+    <pre><code class="language-typescript" data-noescape data-trim style="font-size: 24px;">
+        <span style="opacity: .3">const useToggle = initialValue => {
+            const [value, setValue] = useState(initialValue);
+            
+            const toggle = useCallback(
+                () => setValue(value => !value),
+                []
+            )
+            
+            </span>return [value, toggle];<span style="opacity: .3">
+        }</span>
+    </code></pre>
+    <div style="font-size: 26px;">Возвращаем так же массивом:</div>
+    <ul style="font-size: 26px;">
+        <li>Во-первых, это интуитивнее по аналогии с useState</li>
+        <li>Во-вторых, можно переименовать по назначению при использовании</li>
+    </ul>
+</section>
+
+<section class="little">
+    <h2>Напишем собственный хук</h2>
+    <pre><code class="language-typescript" data-noescape data-trim style="font-size: 24px;">
+        <span style="opacity: .3">const useToggle = initialValue => {
+            const [value, setValue] = useState(initialValue);
+            
+            const toggle = useCallback(
+                () => </span>setValue(value => !value)<span style="opacity: .3">,
+                []
+            )
+            
+            return [value, toggle];
+        }</span>
+    </code></pre>
+    <div style="font-size: 32px;">Используем вариант через колбэк, потому что ссылаемся на предыдущее значение</div>
+</section>
+
+<section class="little">
+    <h2 style="font-size: 44px;">В собственные хуки можно засунуть много всего</h2>
+    <pre><code class="language-typescript" data-noescape data-trim style="font-size: 20px;">
+        const useSearch({ items, searchKey }) => {
+            const [searchValue, setSearchValue] = useState('');
+        
+            const onChangeSearch = debounce(setSearchValue, 300);
+        
+            const filteredItems = useMemo(
+                () => items.filter(
+                    item => item[searchKey].includes(searchValue)
+                ),
+                [items, searchValue, searchKey]
+            );
+        
+            return { searchValue, onChangeSearch, filteredItems };
+        }
+    </code></pre>
+</section>
+
+<section class="little">
+    <h2 style="font-size: 44px;">В собственные хуки можно засунуть много всего</h2>
+    <pre><code class="language-typescript" data-noescape data-trim style="font-size: 20px;">
+        <span style="opacity: .3">const useSearch({ items, searchKey }) => {
+            const [searchValue, setSearchValue] = useState('');
+        
+            const onChangeSearch = debounce(setSearchValue, 300);
+        
+            const filteredItems = useMemo(
+                () => items.filter(
+                    item => item[searchKey].includes(searchValue)
+                ),
+                [items, searchValue, searchKey]
+            );
+        
+            </span>return { searchValue, onChangeSearch, filteredItems };<span style="opacity: .3">
+        }</span>
+    </code></pre>
+    <div style="font-size: 32px;">Здесь уже возвращаем объектом, потому что порядок неочевиден</div>
+</section>
+
+<section class="little">
+    <h2 style="font-size: 44px;">В собственные хуки можно засунуть много всего</h2>
+    <pre><code class="language-typescript" data-noescape data-trim style="font-size: 20px;">
+        <span style="opacity: .3">const useSearch({ items, searchKey }) => {
+            const [searchValue, setSearchValue] = useState('');
+        
+            const onChangeSearch = debounce(setSearchValue, 300);
+        
+            const filteredItems = useMemo(
+                () => items.filter(
+                    item => item[searchKey].includes(searchValue)
+                ),
+                [items, searchValue, searchKey]
+            );
+        
+            return { </span>searchValue, onChangeSearch<span style="opacity: .3">, filteredItems };
+        }</span>
+    </code></pre>
+    <div style="font-size: 32px;">Обработчики для нашего input'а</div>
+</section>
+
+<section class="little">
+    <h2 style="font-size: 44px;">В собственные хуки можно засунуть много всего</h2>
+    <pre><code class="language-typescript" data-noescape data-trim style="font-size: 20px;">
+        <span style="opacity: .3">const useSearch(</span>{ items, searchKey }<span style="opacity: .3">) => {
+            const [</span>searchValue<span style="opacity: .3">, setSearchValue] = useState('');
+        
+            const onChangeSearch = debounce(setSearchValue, 300);
+        
+            const filteredItems = useMemo(
+                () => </span>items.filter(
+                    item => item[searchKey].includes(searchValue)
+                )<span style="opacity: .3">,
+                [items, searchValue, searchKey]
+            );
+        
+            return { searchValue, onChangeSearch, </span>filteredItems<span style="opacity: .3"> };
+        }</span>
+    </code></pre>
+    <div style="font-size: 32px;">Фильтруем элементы по значению из input</div>
+</section>
+
+<section class="little">
+    <h2>Хуки</h2>
+    <ul style="font-size: 0.6em;">
+        <li class="fragment">По соглашению именуются с "use" в начале</li>
+        <li class="fragment">Полагаются на порядок своего выполнения (нельзя вызывать условно или в цикле)</li>
+        <li class="fragment">Сильно сокращают количество кода и вложенность</li>
+        <li class="fragment">Делают компонент более императивным</li>
+        <li class="fragment">React имеет несколько встроенных хуков</li>
+        <li class="fragment">Большинство популярных библиотек для реакта предоставляют наружу, в частности, хуки</li>
+        <li class="fragment">При необходимости легко написать свой хук, спрятав в него некоторую часть логики</li>
+    </ul>
+</section>
+
+<section class="center title-slide">
+    <h1>Вопросы?</h1>
+</section>
+
+<script src="../@lib/core.js"></script></div></div></body></html>
