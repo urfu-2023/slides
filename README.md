@@ -10,8 +10,10 @@
     * [Что такое JSX?](https://kentcdodds.com/blog/what-is-jsx)
     * [Введение в хуки](https://ru.reactjs.org/docs/hooks-intro.html)
     * [Сравнение управляемых и неуправляемых компонентов](https://goshakkk.name/controlled-vs-uncontrolled-inputs-react)
+4. [TypeScript](https://urfu-2023.github.io/slides/04-typescript/) ([pdf](https://urfu-2023.github.io/slides/04-typescript/index.pdf) / [mp4](https://disk.yandex.ru/i/eMASfiwkYWx5Aw)).
 
 # Домашняя работа
 
 1. [Домашняя работа "Форум"](https://urfu-2023.github.io/slides/homework-1/) ([pdf](https://urfu-2023.github.io/slides/homework-1/index.pdf))
 2. [Домашняя работа "Мессенджер"](https://urfu-2023.github.io/slides/homework-2/) ([pdf](https://urfu-2023.github.io/slides/homework-2/index.pdf))
+3. [Домашняя работа "Килограмм"](https://urfu-2023.github.io/slides/homework-3/) ([pdf](https://urfu-2023.github.io/slides/homework-3/index.pdf))

@@ -1,0 +1,34 @@
+.hidden-fragment
+{
+    display: none;
+}
+
+.text-center
+{
+    text-align: center;
+}
+
+.current-fragment.hidden-fragment
+{
+    display: block;
+}
+
+.size_m
+{
+    font-size: .8em !important;
+}
+
+.size_s
+{
+    font-size: .75em !important;
+}
+
+b {
+    color: green;
+}
+
+.features td {
+    padding: 0;
+    padding-right: 100px;
+    font-size: small;
+}
